@@ -94,19 +94,21 @@ void Interpreter::evaluateRules() {
     size_t numPasses = 0;
     bool newTuple = true;
     bool trueOnce = false;
+    size_t rvSize = rootData.rulesVector.size();
     while(newTuple) {
+        newTuple = false;
         trueOnce = false;
-        for(size_t i = 0; i < rootData.rulesVector.size(); i++) {
+        for(size_t i = 0; i < rvSize; i++) {
             cout << rootData.rulesVector.at(i).toString() << endl;
 
             newTuple = evaluateRule(rootData.rulesVector.at(i)).addedTuple;
-           // cout << "Bool value:" << newTuple << endl;
+            //cout << "newTuple:" << newTuple;
             if(newTuple) {
                 trueOnce = newTuple; //keeps true if one is true
             }
 
         }
-        newTuple = trueOnce; //
+        newTuple = trueOnce; // puts value back
         //cout << "numPasses:" << numPasses << endl;
         numPasses++;
     }

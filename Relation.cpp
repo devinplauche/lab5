@@ -59,6 +59,7 @@ Relation Relation::Unite(Relation inRel) {
     relationObj.relationScheme = relationScheme;
     relationObj.relationName = relationName;
     relationObj.tupleSet = tupleSet; // copying (this) Relation
+
     addedTuple = false;
 
 
@@ -70,7 +71,7 @@ Relation Relation::Unite(Relation inRel) {
 }
 
 void Relation::addTuple(Tuple newTuple1) {
-    if(!tupleSet.count(newTuple1)) { // if already in tuple
+    if(!tupleSet.count(newTuple1)) { // if not already in tuple
         addedTuple = true;
         tupleSet.insert(newTuple1);
         cout << tupleToString(newTuple1); // affects bool
@@ -87,8 +88,8 @@ void Relation::addTuple(Tuple newTuple1) {
 string Relation::tupleToString(Tuple tupleInSet) {
     stringstream os1;
     size_t size = tupleInSet.size();
+    bool tupleWasAdded = true;
 
-    addedTuple = true;
     if (relationScheme.attributes.size() == size) {
 
         for (size_t i = 0; i < relationScheme.attributes.size(); i++) {
@@ -103,12 +104,13 @@ string Relation::tupleToString(Tuple tupleInSet) {
         }
 
     } else {
-        cout << "---------------------hit";
+        //cout << "---------------------hit";
         addedTuple = false;
-       // tupleSet.erase(tupleInSet); // Checkme
+        tupleWasAdded = false;
+        tupleSet.erase(tupleInSet); // Checkme
         //os1 << "Inconsistent sizes relationScheme:" << relationScheme.attributes.size() << " tupleInSet" << tupleInSet.size();
     }
-    if (addedTuple) {
+    if (tupleWasAdded) {
         os1 << '\n';
     }
 
