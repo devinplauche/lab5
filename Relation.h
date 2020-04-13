@@ -28,7 +28,7 @@ public:
     Scheme relationScheme;
     string relationName;
     set<Tuple> tupleSet;
-
+    bool inVector(size_t index, vector<pair<size_t,size_t >> samePos1);
     Relation selectConstant(int col, string value);
     Relation selectVariable(int col1, int col2); // only for duplicates
     Relation selectMultVariable(vector<int> colNums, vector<string> dupParams);

@@ -11,8 +11,7 @@ jim('2').
 bob('1').
 
 Rules:
-bob(x) :- jim(x).
-bob(x) :- joe(x).
+jim(x) :- bob(x).
 
 Queries:
 bob(x)?

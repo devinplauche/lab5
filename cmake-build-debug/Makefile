@@ -177,6 +177,33 @@ Datalogprogram.cpp.s:
 	$(MAKE) -f CMakeFiles/lab4.dir/build.make CMakeFiles/lab4.dir/Datalogprogram.cpp.s
 .PHONY : Datalogprogram.cpp.s
 
+Graph.o: Graph.cpp.o
+
+.PHONY : Graph.o
+
+# target to build an object file
+Graph.cpp.o:
+	$(MAKE) -f CMakeFiles/lab4.dir/build.make CMakeFiles/lab4.dir/Graph.cpp.o
+.PHONY : Graph.cpp.o
+
+Graph.i: Graph.cpp.i
+
+.PHONY : Graph.i
+
+# target to preprocess a source file
+Graph.cpp.i:
+	$(MAKE) -f CMakeFiles/lab4.dir/build.make CMakeFiles/lab4.dir/Graph.cpp.i
+.PHONY : Graph.cpp.i
+
+Graph.s: Graph.cpp.s
+
+.PHONY : Graph.s
+
+# target to generate assembly for a file
+Graph.cpp.s:
+	$(MAKE) -f CMakeFiles/lab4.dir/build.make CMakeFiles/lab4.dir/Graph.cpp.s
+.PHONY : Graph.cpp.s
+
 Interpreter1.o: Interpreter1.cpp.o
 
 .PHONY : Interpreter1.o
@@ -203,6 +230,33 @@ Interpreter1.s: Interpreter1.cpp.s
 Interpreter1.cpp.s:
 	$(MAKE) -f CMakeFiles/lab4.dir/build.make CMakeFiles/lab4.dir/Interpreter1.cpp.s
 .PHONY : Interpreter1.cpp.s
+
+Node.o: Node.cpp.o
+
+.PHONY : Node.o
+
+# target to build an object file
+Node.cpp.o:
+	$(MAKE) -f CMakeFiles/lab4.dir/build.make CMakeFiles/lab4.dir/Node.cpp.o
+.PHONY : Node.cpp.o
+
+Node.i: Node.cpp.i
+
+.PHONY : Node.i
+
+# target to preprocess a source file
+Node.cpp.i:
+	$(MAKE) -f CMakeFiles/lab4.dir/build.make CMakeFiles/lab4.dir/Node.cpp.i
+.PHONY : Node.cpp.i
+
+Node.s: Node.cpp.s
+
+.PHONY : Node.s
+
+# target to generate assembly for a file
+Node.cpp.s:
+	$(MAKE) -f CMakeFiles/lab4.dir/build.make CMakeFiles/lab4.dir/Node.cpp.s
+.PHONY : Node.cpp.s
 
 Param.o: Param.cpp.o
 
@@ -489,9 +543,15 @@ help:
 	@echo "... Datalogprogram.o"
 	@echo "... Datalogprogram.i"
 	@echo "... Datalogprogram.s"
+	@echo "... Graph.o"
+	@echo "... Graph.i"
+	@echo "... Graph.s"
 	@echo "... Interpreter1.o"
 	@echo "... Interpreter1.i"
 	@echo "... Interpreter1.s"
+	@echo "... Node.o"
+	@echo "... Node.i"
+	@echo "... Node.s"
 	@echo "... Param.o"
 	@echo "... Param.i"
 	@echo "... Param.s"

@@ -14,16 +14,25 @@ CMakeFiles/lab4.dir/Datalogprogram.cpp.o: ../Param.h
 CMakeFiles/lab4.dir/Datalogprogram.cpp.o: ../Predicate.h
 CMakeFiles/lab4.dir/Datalogprogram.cpp.o: ../Rule.h
 
+CMakeFiles/lab4.dir/Graph.cpp.o: ../Graph.cpp
+CMakeFiles/lab4.dir/Graph.cpp.o: ../Graph.h
+CMakeFiles/lab4.dir/Graph.cpp.o: ../Node.h
+
 CMakeFiles/lab4.dir/Interpreter1.cpp.o: ../Database.h
 CMakeFiles/lab4.dir/Interpreter1.cpp.o: ../Datalogprogram.h
+CMakeFiles/lab4.dir/Interpreter1.cpp.o: ../Graph.h
 CMakeFiles/lab4.dir/Interpreter1.cpp.o: ../Interpreter1.cpp
 CMakeFiles/lab4.dir/Interpreter1.cpp.o: ../Interpreter1.h
+CMakeFiles/lab4.dir/Interpreter1.cpp.o: ../Node.h
 CMakeFiles/lab4.dir/Interpreter1.cpp.o: ../Param.h
 CMakeFiles/lab4.dir/Interpreter1.cpp.o: ../Predicate.h
 CMakeFiles/lab4.dir/Interpreter1.cpp.o: ../Relation.h
 CMakeFiles/lab4.dir/Interpreter1.cpp.o: ../Rule.h
 CMakeFiles/lab4.dir/Interpreter1.cpp.o: ../Scheme.h
 CMakeFiles/lab4.dir/Interpreter1.cpp.o: ../Tuple.h
+
+CMakeFiles/lab4.dir/Node.cpp.o: ../Node.cpp
+CMakeFiles/lab4.dir/Node.cpp.o: ../Node.h
 
 CMakeFiles/lab4.dir/Param.cpp.o: ../Param.cpp
 CMakeFiles/lab4.dir/Param.cpp.o: ../Param.h

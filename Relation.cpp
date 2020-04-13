@@ -17,6 +17,7 @@ Relation Relation::naturalJoin(Relation inputRel) {
         for(size_t j = 0; j < s2.size(); j++) {
             if(s1.at(i) == s2.at(j)) {
                 samePos.push_back(pair<size_t,size_t>(i,j));
+                //cout << i << j << endl;
             }
 
         }
@@ -60,11 +61,11 @@ Relation Relation::Unite(Relation inRel) {
     relationObj.relationName = relationName;
     relationObj.tupleSet = tupleSet; // copying (this) Relation
 
-    addedTuple = false;
+    relationObj.addedTuple = false;
 
 
-    for (set<Tuple>::iterator it=inRel.tupleSet.begin(); it!=inRel.tupleSet.end(); ++it) {
-        relationObj.addTuple((*it));
+    for (const auto & it : inRel.tupleSet) {
+        relationObj.addTuple(it);
     }
 
     return relationObj;
@@ -216,18 +217,32 @@ bool Relation::isJoinable(Tuple t1, Tuple t2, vector<pair<size_t,size_t>> pos) {
 
     return true;
 }
+bool Relation::inVector(size_t index, vector<pair<size_t,size_t >> samePos1) {
+    for(size_t i = 0; i < samePos1.size(); i++) {
+        if(index ==  samePos1.at(i).second) {
+            return true;
+        }
+    }
+    return false;
+}
 Scheme Relation::combineSchemes(Scheme localScheme, Scheme inScheme, vector<pair<size_t,size_t >> samePos1) {
     size_t counter = 0;
 
         for (size_t i = 0; i < inScheme.attributes.size(); i++) {
             if(!samePos1.empty()) { // joins pairs
-                if ((samePos1.at(counter).second != i)) {
+
+                if (!this->inVector(i, samePos1)) {
+
                     localScheme.attributes.push_back(inScheme.attributes.at(i));
-                } else if (samePos1.at(counter).second == i) {
+
+                }
+                else if (this->inVector(i, samePos1)) {
+
                     if (counter < samePos1.size() - 1) {
                         counter++;
                     }
                 }
+
             }
             else { // just adds all values
                 localScheme.attributes.push_back(inScheme.attributes.at(i));
@@ -241,14 +256,19 @@ Tuple Relation::combineTuples(Tuple inTuple, Tuple combTuple, vector<pair<size_t
     size_t counter = 0;
     for(size_t i = 0; i < combTuple.size(); i++) {
         if(!samePos2.empty()) { // joins pairs
-            if ((samePos2.at(counter).second != i)) {
+
+            if (!this->inVector(i, samePos2)) {
+
                 inTuple.push_back(combTuple.at(i));
-            } else if (samePos2.at(counter).second == i) {
+
+            }
+            else if (this->inVector(i, samePos2)) {
 
                 if (counter < samePos2.size() - 1) {
                     counter++;
                 }
             }
+
         }
         else { // just adds all values
             inTuple.push_back(combTuple.at(i));

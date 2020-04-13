@@ -22,7 +22,7 @@ public:
     void evaluateRules();
     Datalog rootData;
     size_t numSuccesful;
-
+    void buildDependencyGraph();
 
 
     Database databaseObj;

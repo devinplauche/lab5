@@ -1,7 +1,9 @@
 file(REMOVE_RECURSE
   "CMakeFiles/lab4.dir/Database.cpp.o"
   "CMakeFiles/lab4.dir/Datalogprogram.cpp.o"
+  "CMakeFiles/lab4.dir/Graph.cpp.o"
   "CMakeFiles/lab4.dir/Interpreter1.cpp.o"
+  "CMakeFiles/lab4.dir/Node.cpp.o"
   "CMakeFiles/lab4.dir/Param.cpp.o"
   "CMakeFiles/lab4.dir/Parser.cpp.o"
   "CMakeFiles/lab4.dir/Predicate.cpp.o"

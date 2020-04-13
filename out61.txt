@@ -1,4 +1,10 @@
+Dependency Graph
+R0:R1,R2
+R1:R0
+R2:R0,R1
+
 Rule Evaluation
+SCC: R0,R1,R2
 r(A,B) :- f(A,X),g(B,X).
   E='1', F='3'
 f(C,D) :- r(D,C).
@@ -59,8 +65,7 @@ g(E,F) :- f(E,X),r(X,F).
 r(A,B) :- f(A,X),g(B,X).
 f(C,D) :- r(D,C).
 g(E,F) :- f(E,X),r(X,F).
-
-Schemes populated after 5 passes through the Rules.
+5 passes: R0,R1,R2
 
 Query Evaluation
 f('3',Z)? Yes(4)

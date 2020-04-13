@@ -14,17 +14,26 @@ CMakeFiles/lab4.dir/Datalogprogram.cpp.o
  /Users/devinplauche/CLionProjects/lab4/Param.h
  /Users/devinplauche/CLionProjects/lab4/Predicate.h
  /Users/devinplauche/CLionProjects/lab4/Rule.h
+CMakeFiles/lab4.dir/Graph.cpp.o
+ /Users/devinplauche/CLionProjects/lab4/Graph.cpp
+ /Users/devinplauche/CLionProjects/lab4/Graph.h
+ /Users/devinplauche/CLionProjects/lab4/Node.h
 CMakeFiles/lab4.dir/Interpreter1.cpp.o
  /Users/devinplauche/CLionProjects/lab4/Database.h
  /Users/devinplauche/CLionProjects/lab4/Datalogprogram.h
+ /Users/devinplauche/CLionProjects/lab4/Graph.h
  /Users/devinplauche/CLionProjects/lab4/Interpreter1.cpp
  /Users/devinplauche/CLionProjects/lab4/Interpreter1.h
+ /Users/devinplauche/CLionProjects/lab4/Node.h
  /Users/devinplauche/CLionProjects/lab4/Param.h
  /Users/devinplauche/CLionProjects/lab4/Predicate.h
  /Users/devinplauche/CLionProjects/lab4/Relation.h
  /Users/devinplauche/CLionProjects/lab4/Rule.h
  /Users/devinplauche/CLionProjects/lab4/Scheme.h
  /Users/devinplauche/CLionProjects/lab4/Tuple.h
+CMakeFiles/lab4.dir/Node.cpp.o
+ /Users/devinplauche/CLionProjects/lab4/Node.cpp
+ /Users/devinplauche/CLionProjects/lab4/Node.h
 CMakeFiles/lab4.dir/Param.cpp.o
  /Users/devinplauche/CLionProjects/lab4/Param.cpp
  /Users/devinplauche/CLionProjects/lab4/Param.h

@@ -7,7 +7,8 @@
 #include "Relation.h"
 #include <iostream>
 #include <map>
-
+#include "Node.h"
+#include "Graph.h"
 void Interpreter::parseInput() {
     size_t scSize = rootData.schemesVector.size();
     size_t fSize = rootData.factsVector.size();
@@ -88,6 +89,16 @@ Relation Interpreter::evaluateQuery(Predicate Query) {
 
     return localRelation;
 }*/
+void Interpreter::buildDependencyGraph() {
+    Graph newGraph;
+    size_t rvSize = rootData.rulesVector.size();
+    for(size_t i = 0; i < rvSize; i++) {
+        Node newNode;
+        newNode.nodeId = i;
+        newGraph.nodeMap[i] = newNode;
+        cout << "passed";
+    }
+}
 
 void Interpreter::evaluateRules() {
     cout << "Rule Evaluation" << endl;
@@ -95,21 +106,25 @@ void Interpreter::evaluateRules() {
     bool newTuple = true;
     bool trueOnce = false;
     size_t rvSize = rootData.rulesVector.size();
+    buildDependencyGraph();
     while(newTuple) {
-        newTuple = false;
+
         trueOnce = false;
         for(size_t i = 0; i < rvSize; i++) {
             cout << rootData.rulesVector.at(i).toString() << endl;
+            Relation relationObj;
+            relationObj = evaluateRule(rootData.rulesVector.at(i));
 
-            newTuple = evaluateRule(rootData.rulesVector.at(i)).addedTuple;
-            //cout << "newTuple:" << newTuple;
+            newTuple = relationObj.addedTuple;
+
+
             if(newTuple) {
-                trueOnce = newTuple; //keeps true if one is true
+                trueOnce = true; //keeps true if one is true
             }
 
         }
         newTuple = trueOnce; // puts value back
-        //cout << "numPasses:" << numPasses << endl;
+
         numPasses++;
     }
 
@@ -132,7 +147,10 @@ Relation Interpreter::evaluateRule(Rule inputRule) {
 
     for(size_t i = 0; i < (qSize); i++) { //FIXME
 
-        relationObj = relationObj.naturalJoin(evaluateQuery(inputRule.rightPredicates.at(i))); // joins each right predicate
+        Predicate localPredicate = inputRule.rightPredicates.at(i);
+        Relation orderObj = evaluateQuery(localPredicate);
+
+        relationObj = relationObj.naturalJoin(orderObj); // joins each right predicate
 
        if( i == (inputRule.rightPredicates.size() - 1)) { // only call on last iteration
            lSize = relationObj.relationScheme.attributes.size();
@@ -153,9 +171,6 @@ Relation Interpreter::evaluateRule(Rule inputRule) {
                 if (lName.at(j) == rName.at(k).paramValue && lName.at(j) == inputRule.leftPredicate.at(0).paramVector.at(i).paramValue) {
 
                     posOfLeftCols.push_back(j);
-                    //cout << lName.at(j);
-
-
 
                 }
             }
@@ -167,10 +182,12 @@ Relation Interpreter::evaluateRule(Rule inputRule) {
     // rename and unite
     size_t drSize = databaseObj.databaseRelations.size();
     for(size_t j = 0; j < drSize; j++) {
+
         if(inputRule.leftPredicate.at(0).predicateName == databaseObj.databaseRelations.at(j).relationName) {
             relationObj = relationObj.renameScheme(databaseObj.databaseRelations.at(j).relationScheme.attributes);
             databaseObj.databaseRelations.at(j) = databaseObj.databaseRelations.at(j).Unite(relationObj); // Unite
             relationObj.addedTuple = databaseObj.databaseRelations.at(j).addedTuple;
+
         }
     }
 

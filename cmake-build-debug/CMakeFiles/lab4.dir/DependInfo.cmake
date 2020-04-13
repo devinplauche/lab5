@@ -6,7 +6,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/devinplauche/CLionProjects/lab4/Database.cpp" "/Users/devinplauche/CLionProjects/lab4/cmake-build-debug/CMakeFiles/lab4.dir/Database.cpp.o"
   "/Users/devinplauche/CLionProjects/lab4/Datalogprogram.cpp" "/Users/devinplauche/CLionProjects/lab4/cmake-build-debug/CMakeFiles/lab4.dir/Datalogprogram.cpp.o"
+  "/Users/devinplauche/CLionProjects/lab4/Graph.cpp" "/Users/devinplauche/CLionProjects/lab4/cmake-build-debug/CMakeFiles/lab4.dir/Graph.cpp.o"
   "/Users/devinplauche/CLionProjects/lab4/Interpreter1.cpp" "/Users/devinplauche/CLionProjects/lab4/cmake-build-debug/CMakeFiles/lab4.dir/Interpreter1.cpp.o"
+  "/Users/devinplauche/CLionProjects/lab4/Node.cpp" "/Users/devinplauche/CLionProjects/lab4/cmake-build-debug/CMakeFiles/lab4.dir/Node.cpp.o"
   "/Users/devinplauche/CLionProjects/lab4/Param.cpp" "/Users/devinplauche/CLionProjects/lab4/cmake-build-debug/CMakeFiles/lab4.dir/Param.cpp.o"
   "/Users/devinplauche/CLionProjects/lab4/Parser.cpp" "/Users/devinplauche/CLionProjects/lab4/cmake-build-debug/CMakeFiles/lab4.dir/Parser.cpp.o"
   "/Users/devinplauche/CLionProjects/lab4/Predicate.cpp" "/Users/devinplauche/CLionProjects/lab4/cmake-build-debug/CMakeFiles/lab4.dir/Predicate.cpp.o"

@@ -90,10 +90,22 @@
 		<Unit filename="/Users/devinplauche/CLionProjects/lab4/Datalogprogram.h">
 			<Option target="lab4"/>
 		</Unit>
+		<Unit filename="/Users/devinplauche/CLionProjects/lab4/Graph.cpp">
+			<Option target="lab4"/>
+		</Unit>
+		<Unit filename="/Users/devinplauche/CLionProjects/lab4/Graph.h">
+			<Option target="lab4"/>
+		</Unit>
 		<Unit filename="/Users/devinplauche/CLionProjects/lab4/Interpreter1.cpp">
 			<Option target="lab4"/>
 		</Unit>
 		<Unit filename="/Users/devinplauche/CLionProjects/lab4/Interpreter1.h">
+			<Option target="lab4"/>
+		</Unit>
+		<Unit filename="/Users/devinplauche/CLionProjects/lab4/Node.cpp">
+			<Option target="lab4"/>
+		</Unit>
+		<Unit filename="/Users/devinplauche/CLionProjects/lab4/Node.h">
 			<Option target="lab4"/>
 		</Unit>
 		<Unit filename="/Users/devinplauche/CLionProjects/lab4/Param.cpp">
