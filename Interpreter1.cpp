@@ -76,22 +76,24 @@ void Interpreter::buildDependencyGraph() {
     cout << "Dependency Graph" << endl;
     for (size_t i = 0; i < rvSize; i++) {
         stringstream os;
+	
         vector<Predicate> bodyPredicates = rootData.rulesVector.at(i).rightPredicates;
         size_t bSize = bodyPredicates.size();
-        Node newNode;
+        
+	//string innerHeadPredicate;
         string removeComma;
         vector<size_t> dependecyEdges;
-        newNode.nodeId = i;
+       	
         cout << "R" << i << ":";
         for (size_t j = 0; j < bSize; j++) {
-
+	
             for (size_t k = 0; k < rvSize; k++) {
-                string innerHeadPredicate = rootData.rulesVector.at(k).leftPredicate.at(0).predicateName;
-                Node innerNode;
-                innerNode.nodeId = k;
+		string innerHeadPredicate = rootData.rulesVector.at(k).leftPredicate.at(0).predicateName;
+                
+                
                 if (bodyPredicates.at(j).predicateName == innerHeadPredicate) {
-                    //cout << "Node" << newGraph.nodeMap[i].nodeId << endl;
-                    //cout <<"Inner Node" <<  newGraph.nodeMap[k].nodeId << endl;
+                     // cout << "Node" << newGraph.nodeMap[i].nodeId << endl;
+                     // cout <<"Inner Node" <<  newGraph.nodeMap[k].nodeId << endl;
 
                     if(!newGraph.nodeMap[i].edgeSet.count(k)) {
                         dependecyEdges.push_back(k);
@@ -104,14 +106,17 @@ void Interpreter::buildDependencyGraph() {
 
                 }
             }
-
+	 
         }
         sort(dependecyEdges.begin(), dependecyEdges.end());
         for(size_t l = 0; l < dependecyEdges.size(); l++) {
             os << "R" << dependecyEdges[l] << ",";
+	     
         }
         removeComma = os.str();
-        removeComma.pop_back();
+	if(removeComma.size() != 0) {
+        	removeComma.pop_back();
+	}
         cout << removeComma;
         cout << endl;
         os.clear();
