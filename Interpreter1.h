@@ -4,8 +4,9 @@
 #include "Relation.h"
 #include "Tuple.h"
 #include "Database.h"
+#include "Node.h"
 #include<vector>
-
+#include "Graph.h"
 class Interpreter { ;
 
 public:
@@ -23,8 +24,8 @@ public:
     Datalog rootData;
     size_t numSuccesful;
     void buildDependencyGraph();
-
-
+    vector<vector<size_t>> nodesInSCC;
+    Graph newGraph;
     Database databaseObj;
     vector<Relation> relationVector;
     vector<Tuple> tupleVector;

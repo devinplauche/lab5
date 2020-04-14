@@ -1,23 +1,22 @@
 Schemes:
-    F(A,B)
-    G(A,B)
-    H(A,B)
+    A(X,Y)
+    B(X,Y)
+    E(X,Y)
+    C(X,Y)
+    D(X,y)
+    F(X,Y)
+    G(X,Y)
 
 Facts:
-    F('1','2').
-    G('2','3').
-    H('3','2').
+    A('1','2').
 
 Rules:
-    F(a,b):-G(b,a),H(a,b).
-    F(a,b):-F(b,a).
-    G(a,b):-H(b,a),F(b,a).
-    H(a,b):-F(b,a),G(a,b).
+    A(X,Y) :- B(X,Y), C(X,Y).
+    B(X,Y) :- A(X,Y), D(X,Y).
+    B(X,Y) :- B(Y,X).
+    E(X,Y) :- F(X,Y), G(X,Y).
+    E(X,Y) :- E(X,Y), F(X,Y).
 
 
 Queries:
-    F(a,b)?
-    G(a,b)?
-    H(a,b)?
-    F('2',b)?
-    G(a,'2')?
+   A(X,Y)?

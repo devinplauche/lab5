@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
         Interpreter InterpreterObj(parsing.theProgram);
    
     
-
+        InterpreterObj.buildDependencyGraph();
         InterpreterObj.evaluateRules(); // driver portion
         InterpreterObj.evaluateAllQueries();
 

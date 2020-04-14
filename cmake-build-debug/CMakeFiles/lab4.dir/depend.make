@@ -77,7 +77,9 @@ CMakeFiles/lab4.dir/Tuple.cpp.o: ../Tuple.h
 
 CMakeFiles/lab4.dir/main.cpp.o: ../Database.h
 CMakeFiles/lab4.dir/main.cpp.o: ../Datalogprogram.h
+CMakeFiles/lab4.dir/main.cpp.o: ../Graph.h
 CMakeFiles/lab4.dir/main.cpp.o: ../Interpreter1.h
+CMakeFiles/lab4.dir/main.cpp.o: ../Node.h
 CMakeFiles/lab4.dir/main.cpp.o: ../Param.h
 CMakeFiles/lab4.dir/main.cpp.o: ../Parser.h
 CMakeFiles/lab4.dir/main.cpp.o: ../Predicate.h

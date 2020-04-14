@@ -10,8 +10,19 @@ using namespace std;
 
 class Node {
 public:
-    int nodeId;
-    set<int> dependencies;
+    Node() {
+        postOrderNumber = 0;
+        visited = false;
+        printed = false;
+        dependsOnItself = false;
+    }
+    bool visited;
+    bool printed;
+    size_t postOrderNumber;
+    size_t nodeId;
+    set<size_t> edgeSet;
+    bool dependsOnItself;
+
 };
 
 

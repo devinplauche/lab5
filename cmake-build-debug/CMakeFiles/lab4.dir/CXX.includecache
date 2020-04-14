@@ -22,10 +22,6 @@ Rule.h
 Predicate.h
 /Users/devinplauche/CLionProjects/lab4/Predicate.h
 
-/Users/devinplauche/CLionProjects/lab4/Graph.cpp
-Graph.h
-/Users/devinplauche/CLionProjects/lab4/Graph.h
-
 /Users/devinplauche/CLionProjects/lab4/Graph.h
 map
 -
@@ -49,6 +45,10 @@ Node.h
 /Users/devinplauche/CLionProjects/lab4/Node.h
 Graph.h
 /Users/devinplauche/CLionProjects/lab4/Graph.h
+sstream
+-
+algorithm
+-
 
 /Users/devinplauche/CLionProjects/lab4/Interpreter1.h
 Datalogprogram.h
@@ -59,12 +59,12 @@ Tuple.h
 /Users/devinplauche/CLionProjects/lab4/Tuple.h
 Database.h
 /Users/devinplauche/CLionProjects/lab4/Database.h
-vector
--
-
-/Users/devinplauche/CLionProjects/lab4/Node.cpp
 Node.h
 /Users/devinplauche/CLionProjects/lab4/Node.h
+vector
+-
+Graph.h
+/Users/devinplauche/CLionProjects/lab4/Graph.h
 
 /Users/devinplauche/CLionProjects/lab4/Node.h
 set
@@ -72,24 +72,6 @@ set
 
 /Users/devinplauche/CLionProjects/lab4/Param.h
 string
--
-
-/Users/devinplauche/CLionProjects/lab4/Parser.h
-Token1.h
-/Users/devinplauche/CLionProjects/lab4/Token1.h
-Datalogprogram.h
-/Users/devinplauche/CLionProjects/lab4/Datalogprogram.h
-string
--
-iostream
--
-Scanner1.h
-/Users/devinplauche/CLionProjects/lab4/Scanner1.h
-Rule.h
-/Users/devinplauche/CLionProjects/lab4/Rule.h
-Predicate.h
-/Users/devinplauche/CLionProjects/lab4/Predicate.h
-deque
 -
 
 /Users/devinplauche/CLionProjects/lab4/Predicate.h
@@ -120,14 +102,6 @@ Predicate.h
 vector
 -
 
-/Users/devinplauche/CLionProjects/lab4/Scanner1.h
-string
--
-fstream
--
-Token1.h
-/Users/devinplauche/CLionProjects/lab4/Token1.h
-
 /Users/devinplauche/CLionProjects/lab4/Scheme.h
 string
 -
@@ -138,27 +112,9 @@ set
 Tuple.h
 /Users/devinplauche/CLionProjects/lab4/Tuple.h
 
-/Users/devinplauche/CLionProjects/lab4/Token1.h
-string
--
-
 /Users/devinplauche/CLionProjects/lab4/Tuple.h
 string
 -
 vector
 -
-
-/Users/devinplauche/CLionProjects/lab4/main.cpp
-iostream
--
-Parser.h
-/Users/devinplauche/CLionProjects/lab4/Parser.h
-deque
--
-Token1.h
-/Users/devinplauche/CLionProjects/lab4/Token1.h
-Scanner1.h
-/Users/devinplauche/CLionProjects/lab4/Scanner1.h
-Interpreter1.h
-/Users/devinplauche/CLionProjects/lab4/Interpreter1.h
 

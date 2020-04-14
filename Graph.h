@@ -11,8 +11,15 @@
 using namespace std;
 class Graph {
 public:
-    map<int, Node> nodeMap;
+    map<size_t, Node> nodeMap;
+    vector<pair<Node ,Node>> edgeVector;
+    vector<pair<Node, Node>> reverseEdgeGraph;
+    void depthFirstSearch(vector<pair<Node,Node>> &inGraph, Node &startingNode);
+    size_t counter = 1;
+    vector<size_t> sccNodes;
 
+
+    string toString();
 };
 
 

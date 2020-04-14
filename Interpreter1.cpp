@@ -9,6 +9,9 @@
 #include <map>
 #include "Node.h"
 #include "Graph.h"
+#include <sstream>
+#include <algorithm>
+
 void Interpreter::parseInput() {
     size_t scSize = rootData.schemesVector.size();
     size_t fSize = rootData.factsVector.size();
@@ -52,52 +55,135 @@ void Interpreter::parseInput() {
 
 
 }
-/*
-Relation Interpreter::evaluateQuery(Predicate Query) {
-    size_t qSize = Query.paramVector.size();
-    string searchString = Query.predicateName;
-    Relation localRelation = databaseObj.lookUpRelation(searchString);
-    vector<string> newScheme;
-    map<string, int> locations;
-    vector<int> indexes;
-    for (size_t i = 0; i < qSize; i++){
-        if(Query.paramVector.at(i).isConstant){
-            localRelation = localRelation.selectConstant(i, Query.paramVector.at(i).paramValue);
-        }
-        else {
-
-            if((locations.end()->second) == locations[Query.paramVector.at(i).paramValue]){
-                locations[Query.paramVector.at(i).paramValue] = i;
-                newScheme.push_back(Query.paramVector.at(i).paramValue);
-                indexes.push_back(i);
-            } else {
-                localRelation = localRelation.selectVariable(i, locations[Query.paramVector.at(i).paramValue]);
-            }
-        }
-    }
-
-    localRelation= localRelation.projectCol(indexes);
-    localRelation = localRelation.renameScheme(newScheme);
-
-    if(localRelation.tupleSet.size() > 0) {
-        numSuccesful = localRelation.tupleSet.size();
-        successfulQuery = true;
-    }
-    else {
-        successfulQuery = false;
-    }
-
-    return localRelation;
-}*/
 void Interpreter::buildDependencyGraph() {
-    Graph newGraph;
+    //Graph newGraph;
+    set<string> nodeNames; // used to check for duplicates
     size_t rvSize = rootData.rulesVector.size();
-    for(size_t i = 0; i < rvSize; i++) {
+    for (size_t i = 0; i < rvSize; i++) {
+        string headPredicate = rootData.rulesVector.at(i).leftPredicate.at(
+                0).predicateName; // used for checking for duplicates
         Node newNode;
         newNode.nodeId = i;
         newGraph.nodeMap[i] = newNode;
-        cout << "passed";
+        /*if(!nodeNames.count(headPredicate)) { // if not already in set
+            newGraph.nodeMap[i] = newNode;
+        }
+        nodeNames.insert(headPredicate); // used for duplicate check*/
     }
+    // make edges in for loop
+    // rename variables for convenience
+    // size_t ngSize = newGraph.nodeMap.size();
+    cout << "Dependency Graph" << endl;
+    for (size_t i = 0; i < rvSize; i++) {
+        stringstream os;
+        vector<Predicate> bodyPredicates = rootData.rulesVector.at(i).rightPredicates;
+        size_t bSize = bodyPredicates.size();
+        Node newNode;
+        string removeComma;
+        vector<size_t> dependecyEdges;
+        newNode.nodeId = i;
+        cout << "R" << i << ":";
+        for (size_t j = 0; j < bSize; j++) {
+
+            for (size_t k = 0; k < rvSize; k++) {
+                string innerHeadPredicate = rootData.rulesVector.at(k).leftPredicate.at(0).predicateName;
+                Node innerNode;
+                innerNode.nodeId = k;
+                if (bodyPredicates.at(j).predicateName == innerHeadPredicate) {
+                    //cout << "Node" << newGraph.nodeMap[i].nodeId << endl;
+                    //cout <<"Inner Node" <<  newGraph.nodeMap[k].nodeId << endl;
+
+                    if(!newGraph.nodeMap[i].edgeSet.count(k)) {
+                        dependecyEdges.push_back(k);
+                    }
+                    newGraph.nodeMap[i].edgeSet.insert(k);
+                    //newGraph.nodeMap[k].edgeSet.insert(i);//reverseEdge
+                    newGraph.edgeVector.emplace_back(pair<Node, Node>(newGraph.nodeMap[i], newGraph.nodeMap[k])); //CHECK
+                    newGraph.reverseEdgeGraph.emplace_back(pair<Node, Node>(newGraph.nodeMap[k], newGraph.nodeMap[i]));//CHECK emplace instead of push
+
+
+                }
+            }
+
+        }
+        sort(dependecyEdges.begin(), dependecyEdges.end());
+        for(size_t l = 0; l < dependecyEdges.size(); l++) {
+            os << "R" << dependecyEdges[l] << ",";
+        }
+        removeComma = os.str();
+        removeComma.pop_back();
+        cout << removeComma;
+        cout << endl;
+        os.clear();
+}
+    cout << endl;
+
+    /*size_t rdSize = newGraph.reverseEdgeGraph.size();
+    for(size_t i = 0; i < rdSize; i++) {
+        cout << "First" << newGraph.reverseEdgeGraph[i].first.nodeId << endl;
+        cout << "Second" << newGraph.reverseEdgeGraph[i].second.nodeId << endl;
+    }*/
+    for (size_t i = 0; i < newGraph.nodeMap.size(); i++) {
+
+        if (!newGraph.nodeMap[i].visited) {
+
+            newGraph.depthFirstSearch(newGraph.reverseEdgeGraph, newGraph.nodeMap[i]);
+        }
+
+    }
+
+    vector<pair<size_t, size_t>> postOrderNumbers;
+    for (size_t i = 0; i < newGraph.nodeMap.size(); i++) {
+
+        postOrderNumbers.push_back(pair<size_t, size_t>(newGraph.nodeMap[i].postOrderNumber, i));
+        newGraph.nodeMap[i].visited = false; // resets values
+    }
+    sort(postOrderNumbers.begin(), postOrderNumbers.end());
+    newGraph.sccNodes.clear();
+    newGraph.counter = 1;
+    size_t index = 0;
+    bool pushLater = false;
+    for (size_t i = 0 ; i < newGraph.nodeMap.size(); i++) {
+        if(newGraph.nodeMap[i].edgeSet.count(i)) {
+            newGraph.nodeMap[i].dependsOnItself = true;
+            //cout << "depends-----" << i << endl;
+        }
+    }
+
+    for (size_t i = newGraph.nodeMap.size() - 1; i >= 0; --i) { //FIXME type warning before submission
+        if(newGraph.nodeMap.size() == 0){
+            break;
+        }
+        index = postOrderNumbers[i].second;
+
+        if (newGraph.nodeMap[index].visited) {
+            //newGraph.sccNodes.push_back(index);
+
+            pushLater = false;
+        } else {
+            pushLater = true;
+        }
+        newGraph.depthFirstSearch(newGraph.edgeVector, newGraph.nodeMap[index]);
+
+        if (pushLater) {
+
+            nodesInSCC.push_back(newGraph.sccNodes);
+        }
+        newGraph.sccNodes.clear();
+        if(i == 0){
+            break;
+        }
+    }
+    /*for (size_t i = 0; i < nodesInSCC.size(); i++) {
+        for (size_t j = 0; j < nodesInSCC[i].size(); j++) {
+            cout << nodesInSCC[i][j];
+        }
+        cout << endl;
+    }*/
+
+
+
+
 }
 
 void Interpreter::evaluateRules() {
@@ -105,30 +191,82 @@ void Interpreter::evaluateRules() {
     size_t numPasses = 0;
     bool newTuple = true;
     bool trueOnce = false;
-    size_t rvSize = rootData.rulesVector.size();
-    buildDependencyGraph();
-    while(newTuple) {
+    bool hitMultiple = false;
+    //size_t rvSize = rootData.rulesVector.size();
 
-        trueOnce = false;
-        for(size_t i = 0; i < rvSize; i++) {
-            cout << rootData.rulesVector.at(i).toString() << endl;
+    for (size_t i = 0; i < nodesInSCC.size(); i++) {
+        newTuple =true;
+        for(size_t j = 0; j < nodesInSCC[i].size(); j++) {
+
             Relation relationObj;
-            relationObj = evaluateRule(rootData.rulesVector.at(i));
-
-            newTuple = relationObj.addedTuple;
+            //relationObj = evaluateRule(rootData.rulesVector.at(i));
 
 
-            if(newTuple) {
-                trueOnce = true; //keeps true if one is true
+            if(nodesInSCC[i].size() != 1 || newGraph.nodeMap[nodesInSCC[i][j]].dependsOnItself ){ //fixed point algorithm
+                //cout << "hit fixed" << endl;
+                if (newTuple) {
+                cout << "SCC: ";
+                for (size_t l = 0; l < nodesInSCC[i].size(); l++) {
+                    cout << "R" << nodesInSCC[i][l];
+                    if (l != nodesInSCC[i].size() - 1) {
+                        cout << ",";
+                    }
+                }
+                cout << endl;
+                }
+
+                while(newTuple) {
+
+                    trueOnce = false;
+                    hitMultiple = true;
+                    for(size_t k = 0; k < nodesInSCC[i].size(); k++) { // FIXME (i<size)
+                        cout << rootData.rulesVector.at(nodesInSCC[i][k]).toString() << endl;
+                        //Relation relationObj;
+                        relationObj = evaluateRule(rootData.rulesVector.at(nodesInSCC[i][k]));
+
+                        newTuple = relationObj.addedTuple;
+
+
+                        if(newTuple) {
+                            trueOnce = true; //keeps true if one is true
+                        }
+
+                    }
+                    newTuple = trueOnce; // puts value back
+
+                    numPasses++;
+                }
+                if(hitMultiple) {
+                    cout << numPasses << " passes: ";
+                    for (size_t l = 0; l < nodesInSCC[i].size(); l++) {
+                        cout << "R" << nodesInSCC[i][l];
+                        if (l != nodesInSCC[i].size() - 1) {
+                            cout << ",";
+                        }
+                    }
+                    cout << endl;
+                }
+                hitMultiple = false;
+
+
+            }
+            else  { //FIXME check to see if it depends on itself!
+                cout << "SCC: R" <<  nodesInSCC[i][j] << endl;
+
+                cout << rootData.rulesVector.at(nodesInSCC[i][j]).toString() << endl; // the access works because of howe we assigned Ids
+                relationObj = evaluateRule(rootData.rulesVector.at(nodesInSCC[i][j]));
+                newTuple = relationObj.addedTuple;
+                numPasses++;
+                cout <<  numPasses << " passes: R" << nodesInSCC[i][j] << endl;
             }
 
-        }
-        newTuple = trueOnce; // puts value back
 
-        numPasses++;
+        }
+        numPasses = 0;
     }
 
-    cout << endl << "Schemes populated after " << numPasses << " passes through the Rules." << endl << endl;
+
+cout << endl;
 
 
 }
